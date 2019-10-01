@@ -4,6 +4,6 @@
 
 The output directory contains analysis output, processed datasets, logs, or other processed things.
 
-"manhattan.RData" includes all trees in Manhattan (24 features)
+"manhattan.RData" includes all trees in Manhattan (24 features) -> WE USE THIS ONE FOR NOW
 
-"boroughs.RDAta" includes all tres in entire NYC (24 features)
+"boroughs.RData" includes all tres in entire NYC (24 features)
