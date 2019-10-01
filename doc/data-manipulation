@@ -1,0 +1,16 @@
+# Tim Schleicher
+# Data Manipulation for Shiny App
+
+
+trees <- "2015_Street_Tree_Census_._Tree_Data" <- read.csv("../data/2015_Street_Tree_Census_-_Tree_Data.csv")
+
+# Create dataset with necessary variables for all boroughs
+trees <- trees %>%
+  select(tree_dbh, curb_loc, status, health, spc_common, steward, sidewalk, 
+         root_stone, root_grate, root_other, trunk_wire, trnk_light, trnk_other,
+         brch_light, brch_shoe, brch_other, address, postcode, zip_city,
+         borough, latitude, longitude, x_sp, y_sp)
+
+# Create dataset with necessary variables only for Manhattan
+trees_man <- trees %>%
+  filter(borough == "Manhattan")
