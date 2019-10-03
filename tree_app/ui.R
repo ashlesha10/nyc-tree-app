@@ -8,26 +8,68 @@
 #
 
 library(shiny)
+library(leaflet)
+library(tidyverse)
 
-# Define UI for application that draws a histogram
-shinyUI(fluidPage(
+# load('./output/boroughs.RData')
+# # store species in a vector
+# species <- trees %>%
+#     filter(status == "Alive") %>%
+#     select(spc_common) %>%
+#     lapply(as.character) %>%
+#     unlist(.) %>%
+#     as.factor(.)
+# species <- levels(species)
 
-    # Application title
-    titlePanel("Old Faithful Geyser Data"),
+shinyUI(navbarPage("NYC Tree",id="map",
+                   
+                   ### FIRST MAP PANEL ###
+                   tabPanel("NYC Tree Overview",
+                            div(class="outer",
+                                tags$style(".outer {position: fixed; top: 41px; left: 0; right: 0; bottom: 0; overflow: hidden; padding: 0}"),
+                                leafletOutput("map", width = "100%", height = "100%"),
+                                
+                                absolutePanel(id = "selection", class = "panel panel-default", fixed =TRUE,
+                                              draggable = TRUE, top = 130, left = 0, right = 40, bottom = "auto",
+                                              width =330, height = "auto"),
 
-    # Sidebar with a slider input for number of bins
-    sidebarLayout(
-        sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
-        ),
+                                              h3("Selection Panel"),
 
-        # Show a plot of the generated distribution
-        mainPanel(
-            plotOutput("distPlot")
-        )
-    )
-))
+                                              radioButtons("status", "Status", choices = c("Alive","Dead","Stump"),
+                                                           selected = "Alive"),
+                                              conditionalPanel(condition = "input.status == 'Alive'",
+                                                               selectInput("health", "Health", choices = c("Fair", "Good", "Poor"),
+                                                                           selected = "Good"),
+                                                               selectInput("species", "Species", choices = species[2:133],
+                                                                           selected = "'Schubert' chokecherry"),
+                                                               h4("Side Walk Condtion"),
+                                                               checkboxInput("sidewalk", "Damaged", value = FALSE)),
+                                              checkboxGroupInput("borough", h4("Borough"),
+                                                                 choices = c("Bronx", "Brooklyn", "Manhattan", "Queens", "Staten Island"),
+                                                                 selected = "Bronx"),
+                                              sliderInput("diameter", "Tree Diameter", min=0, max=450, value = c(4, 11))
+
+
+                   )
+                   )
+                   )
+)
+
+                    
+                                               
+                                               
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+    
