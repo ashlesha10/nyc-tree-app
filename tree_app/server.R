@@ -10,13 +10,38 @@
 library(shiny)
 library(leaflet)
 
-# Define server logic required to draw a histogram
+load('../output/boroughs.RData')
+
 shinyServer(function(input, output, session) {
-
-    output$map <- renderLeaflet({
-        leaflet() %>%
-            addProviderTiles("CartoDB") %>%  
-            setView(lng=40.730610, lat= -73.935242, zoom=8)
-    })
-
+  
+  
+  # Reactive expression for the data subsetted to what the user selected
+  filteredData <- reactive({
+    if(input$status == 'Alive'){
+      trees %>%
+      filter(status == input$status) %>%
+      filter(health == input$health) %>%
+      filter(spc_common == input$species) %>%
+      filter(borough == input$borough) %>%
+      filter(tree_dbh >= input$diameter[1] & tree_dbh <= input$diameter[2])
+    }
+    else{
+      trees %>%
+        filter(status == input$status) %>%
+        filter(borough == input$borough)
+    }
+    
+  })
+  
+  output$map <- renderLeaflet({
+    # Use leaflet() here, and only include aspects of the map that
+    # won't need to change dynamically (at least, not unless the
+    # entire map is being torn down and recreated).
+    filteredData() %>%
+      leaflet() %>%
+      addCircleMarkers(fillColor = "red", radius = 3,
+                       stroke = FALSE, fillOpacity = 0.5) %>%
+      addProviderTiles("CartoDB.Positron")
+  })
+  
 })
