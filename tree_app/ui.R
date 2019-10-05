@@ -26,12 +26,12 @@ shinyUI(navbarPage("NYC Tree",id="map",
                    ### FIRST MAP PANEL ###
                    tabPanel("NYC Tree Overview",
                             div(class="outer",
-                                tags$style(".outer {position: fixed; top: 41px; left: 0; right: 0; bottom: 0; overflow: hidden; padding: 0}"),
+                                tags$style(".outer {position: fixed; top: 41px; left: 0; right: 0; bottom: 0; overflow: hidden; padding: 0;}"),
                                 leafletOutput("map", width = "100%", height = "100%"),
                                 
-                                absolutePanel(id = "selection", class = "panel panel-default", fixed =TRUE,
-                                              draggable = TRUE, top = 130, left = 0, right = 40, bottom = "auto",
-                                              width =330, height = "auto"),
+                                absolutePanel(id = "controls", class = "panel panel-default", fixed = TRUE,
+                                              draggable = TRUE, top = 60, left = 60, right = 40, bottom = "auto",
+                                              width = 330, height = "auto",
 
                                               h3("Selection Panel"),
 
@@ -53,7 +53,7 @@ shinyUI(navbarPage("NYC Tree",id="map",
                    )
                    )
                    )
-)
+))
 
                     
                                                
