@@ -11,15 +11,15 @@ library(shiny)
 library(leaflet)
 library(tidyverse)
 
-# load('./output/boroughs.RData')
+ load('./output/boroughs.RData')
 # # store species in a vector
-# species <- trees %>%
-#     filter(status == "Alive") %>%
-#     select(spc_common) %>%
-#     lapply(as.character) %>%
-#     unlist(.) %>%
-#     as.factor(.)
-# species <- levels(species)
+ species <- trees %>%
+     filter(status == "Alive") %>%
+     select(spc_common) %>%
+     lapply(as.character) %>%
+     unlist(.) %>%
+     as.factor(.)
+ species <- levels(species)
 
 shinyUI(navbarPage("NYC Tree",id="map",
                    
