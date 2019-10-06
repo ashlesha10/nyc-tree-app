@@ -110,11 +110,11 @@ rownames(problem_count_per_borough) <- c("Manhattan", "Bronx", "Brooklyn", "Quee
 
 df <- as.data.frame(t(problem_count_per_borough))
 
-Borough <- c("Root_stone", "Root_grate", "Root_other", "Trunk_wire", 
+Problem <- c("Root_stone", "Root_grate", "Root_other", "Trunk_wire", 
          "Trunk_light", "Trunk_other", "Branch_light", "Branch_shoe",
          "Branch_other")
 
-borough_problems <- cbind(df, Borough)
+borough_problems <- cbind(df, Problem)
 
 save(borough_problems, file = "borough_problems.RData")
 
