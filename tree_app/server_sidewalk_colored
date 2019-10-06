@@ -14,23 +14,13 @@ load('../output/boroughs.RData')
 
 shinyServer(function(input, output, session) {
   
-  #trees <- trees %>%
-#    filter(sidewalk != "")
   # Reactive expression for the data subsetted to what the user selected
   filteredData <- reactive({
-    
-    if(input$sidewalk == FALSE){
-      damage <- "NoDamage"
-    }
-    else{
-      damage <- "Damage"
-    }
     if(input$status == 'Alive'){
       trees %>%
         filter(status == input$status) %>%
         filter(health == input$health) %>%
         filter(spc_common == input$species) %>%
-        filter(sidewalk == damage) %>%
         filter(borough == input$borough) %>%
         filter(tree_dbh >= input$diameter[1] & tree_dbh <= input$diameter[2])
     }
@@ -42,15 +32,19 @@ shinyServer(function(input, output, session) {
     
   })
   
+  pal <- colorFactor(palette = c('red','blue'), levels = c("Damage","NoDamage"))
+  
   output$map <- renderLeaflet({
     # Use leaflet() here, and only include aspects of the map that
     # won't need to change dynamically (at least, not unless the
     # entire map is being torn down and recreated).
     filteredData() %>%
       leaflet() %>%
-      addCircleMarkers(fillColor = "red", radius = 3,
-                       stroke = FALSE, fillOpacity = 0.5,label = ~address) %>%
-      addProviderTiles("CartoDB.Positron")
+      addProviderTiles("CartoDB.Positron")%>%
+      addCircleMarkers(color = ~pal(sidewalk), radius = 3,
+                       stroke = FALSE, fillOpacity = 0.5, label = ~address) %>% 
+      addLegend(position = "bottomright", pal = pal, values = ~sidewalk)
+      
   })
   
 })
