@@ -14,16 +14,25 @@ load('../output/boroughs.RData')
 
 shinyServer(function(input, output, session) {
   
-  
+  #trees <- trees %>%
+#    filter(sidewalk != "")
   # Reactive expression for the data subsetted to what the user selected
   filteredData <- reactive({
+    
+    if(input$sidewalk == FALSE){
+      damage <- "NoDamage"
+    }
+    else{
+      damage <- "Damage"
+    }
     if(input$status == 'Alive'){
       trees %>%
-      filter(status == input$status) %>%
-      filter(health == input$health) %>%
-      filter(spc_common == input$species) %>%
-      filter(borough == input$borough) %>%
-      filter(tree_dbh >= input$diameter[1] & tree_dbh <= input$diameter[2])
+        filter(status == input$status) %>%
+        filter(health == input$health) %>%
+        filter(spc_common == input$species) %>%
+        filter(sidewalk == damage) %>%
+        filter(borough == input$borough) %>%
+        filter(tree_dbh >= input$diameter[1] & tree_dbh <= input$diameter[2])
     }
     else{
       trees %>%
