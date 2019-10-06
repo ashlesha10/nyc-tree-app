@@ -40,7 +40,7 @@ shinyServer(function(input, output, session) {
     filteredData() %>%
       leaflet() %>%
       addCircleMarkers(fillColor = "red", radius = 3,
-                       stroke = FALSE, fillOpacity = 0.5,popup = ~address) %>%
+                       stroke = FALSE, fillOpacity = 0.5,label = ~address) %>%
       addProviderTiles("CartoDB.Positron")
   })
   
