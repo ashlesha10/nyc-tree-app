@@ -25,23 +25,23 @@ library(shinyWidgets)
 shinyUI(navbarPage("NYC Tree",id="map",
                    tabPanel("Overview",
                             setBackgroundImage(
-                              src="background.jpg"
+                              src="background3.jpg"
                             ),
-                            h2(strong("Motivations", style = "color:white")),
+                            h2(strong("Motivations", style = "color:black")),
                             
                             div("This APP is designed for 'NYC Street Tree Caring Program', which is a volunteer program
                                that intend to help better preserve and protect the street trees of New York City. This APP 
                                 allows more convnient ways to locate trees, identify specific tree problem, and spot additional 
-                                threats to trees from surrounding environment.", style = "color: white; font-size: 18px"),
+                                threats to trees from surrounding environment.", style = "color: black; font-size: 18px"),
                             
                             br(),
-                            h2(strong("Features", style = "color:white")),
+                            h2(strong("Features", style = "color:black")),
                             
                             div("The main feature of this APP is an interactive map where user can apply mutiple filters, so that 
                                 they are able to identify tree based on specific requirements. Moreover, we have incorporate the 
                                 NYC dog dataset, in order to identify whether street tree conditions are affected by the the number 
                                 and species of dogs.", 
-                                style = "color: white; font-size: 18px")
+                                style = "color: black; font-size: 18px")
                             ),
                    
                    ### FIRST MAP PANEL ###
