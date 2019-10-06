@@ -1,16 +1,29 @@
-#
-# This is the server logic of a Shiny web application. You can run the
-# application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-
 library(shiny)
 library(leaflet)
+library(zipcode)
 
 load('../output/boroughs.RData')
+data <- read.csv('/Users/Chen/Desktop/GR5243/NYC_Dogs.csv')
+
+dogs.bronx <- data %>%
+  filter(borough == "Bronx")
+dogs.bronx <- transform(dogs.bronx, freq.loc = ave(seq(nrow(dogs.bronx)), ZipCode, FUN=length))
+
+dogs.brooklyn <- data %>%
+  filter(borough == "Brooklyn") 
+dogs.brooklyn <- transform(dogs.brooklyn, freq.loc = ave(seq(nrow(dogs.brooklyn)), ZipCode, FUN=length))
+
+dogs.manhattan <- data %>%
+  filter(borough == "Manhattan")
+dogs.manhattan <- transform(dogs.manhattan, freq.loc = ave(seq(nrow(dogs.manhattan)), ZipCode, FUN=length))
+
+dogs.queens <- data %>%
+  filter(borough == "Queens")
+dogs.queens <- transform(dogs.queens, freq.loc = ave(seq(nrow(dogs.queens)), ZipCode, FUN=length))
+
+dogs.staten <- data %>%
+  filter(borough == "Staten Island")
+dogs.staten <- transform(dogs.staten, freq.loc = ave(seq(nrow(dogs.staten)), ZipCode, FUN=length))
 
 shinyServer(function(input, output, session) {
   
@@ -43,8 +56,17 @@ shinyServer(function(input, output, session) {
       addProviderTiles("CartoDB.Positron")%>%
       addCircleMarkers(color = ~pal(sidewalk), radius = 3,
                        stroke = FALSE, fillOpacity = 0.5, label = ~address) %>% 
-      addLegend(position = "bottomright", pal = pal, values = ~sidewalk)
+      addLegend(position = "bottomright", pal = pal, values = ~sidewalk) %>% 
+      addCircleMarkers(data = dogs.bronx, radius = 3, color = "purple", group = "Bronx") %>%
+      addCircleMarkers(data = dogs.brooklyn, radius = 3, color = "purple", group = "Brooklyn") %>%
+      addCircleMarkers(data = dogs.manhattan, radius = 3, color = "purple", group = "Manhattan") %>%
+      addCircleMarkers(data = dogs.queens, radius = 3, color = "purple", group = "Queens") %>%
+      addCircleMarkers(data = dogs.staten, radius = 3, color = "purple", group = "Staten Island") %>%
+      addLayersControl(
+        overlayGroups = c("Bronx","Brooklyn","Manhattan","Queens","Staten Island")
+        )
       
   })
   
 })
+
