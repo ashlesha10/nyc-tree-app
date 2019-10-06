@@ -1,0 +1,22 @@
+```{r}
+dogs <- read.csv('./NYC_Dog_Licensing_Dataset.csv')
+
+library(zipcode)
+data(zipcode)
+as.character(dogs$ZipCode)
+as.character(zipcode$zip)
+colnames(zipcode)[colnames(zipcode)=="zip"] <- "ZipCode"
+dogs <- merge(dogs, zipcode, by = "ZipCode")
+
+#dogs.centralharlem <- dogs[which(dogs$ZipCode %in% c(10026, 10027, 10030, 10037, 10039)),]
+#dogs.chelsea.clinton <-dogs[which(dogs$ZipCode %in% c(10001, 10011, 10018, 10019, 10020, 10036)),]
+#dogs.eastharlem <- dogs[which(dogs$ZipCode %in% c(10029, 10035)),]
+#dogs.gramercy.murray <- dogs[which(dogs$ZipCode %in% c(10010, 10016, 10017, 10022)),]
+#dogs.greenwich.soho <- dogs[which(dogs$ZipCode %in% c(10012, 10013, 10014)),]
+#dogs.lowermanhattan <- dogs[which(dogs$ZipCode %in% c(10004, 10005, 10006, 10007, 10038, 10280)),]
+#dogs.lowereast <- dogs[which(dogs$ZipCode %in% c(10002, 10003, 10009)),]
+#dogs.uppereast <- dogs[which(dogs$ZipCode %in% c(10021, 10028, 10044, 10065, 10075, 10128)),]
+#dogs.upperwest <- dogs[which(dogs$ZipCode %in% c(10023, 10024, 10025)),]
+#dogs.inwood <- dogs[which(dogs$ZipCode %in% c(10031, 10032, 10033, 10034, 10040)),]
+
+```
