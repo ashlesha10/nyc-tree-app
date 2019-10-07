@@ -87,10 +87,20 @@ shinyUI(navbarPage("NYC Tree",id="map",
                                 
                                 )
                             
-                   )
-                   # ,
-                   # tabPanel("Borough Details",
-                   #                       plotOutput("plot1"))
+                   ),
+                   tabPanel("Borough Details",
+                            
+                            sidebarPanel(id = "probcontrols",
+                                          radioButtons("problem", h4("Please select borough"), choices = c("Bronx", 
+                                                                                                       "Brooklyn", "Manhattan", "Queens", 
+                                                                                                       "Staten Island"), 
+                                                                                           selected = "Manhattan"),
+                                         p("Branch_light = presence of a branch problem caused by lights or wires"),
+                                         p("...")
+                                          ),        
+                            
+                            mainPanel(plotOutput("plot1")))
+                   
                    )
         )
 
