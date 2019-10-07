@@ -73,11 +73,14 @@ shinyUI(navbarPage("NYC Tree",id="map",
                                                                              "Staten Island"),
                                                                  selected = "Bronx"),
                                               sliderInput("diameter", "Tree Diameter", min=0, max=450, value = c(4, 11))
+                                              
 
 
                    )
                    )
-                   )
+                   ),
+                   tabPanel("Borough Details",
+                            plotOutput("plot1"))
 ))
 
                     
