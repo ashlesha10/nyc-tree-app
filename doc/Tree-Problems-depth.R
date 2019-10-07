@@ -106,7 +106,7 @@ colnames(problem_count_per_borough) <- c("Root_stone", "Root_grate", "Root_other
                                          "Trunk_light", "Trunk_other", "Branch_light", "Branch_shoe",
                                          "Branch_other")
 
-rownames(problem_count_per_borough) <- c("Manhattan", "Bronx", "Brooklyn", "Queens", "Staten_Island")
+rownames(problem_count_per_borough) <- c("Manhattan", "Bronx", "Brooklyn", "Queens", "Staten Island")
 
 df <- as.data.frame(t(problem_count_per_borough))
 
