@@ -10,9 +10,11 @@
 library(shiny)
 library(leaflet)
 library(htmltools)
+library(ggplot2)
+library(dplyr)
 
 load('../output/boroughs.RData')
-#load('../output/borough_problems.RData')
+load('../output/borough_problems.RData')
 
 dogs <- read.csv('../output/NYC_Dogs.csv')
 dog_count <- dogs %>%
@@ -78,19 +80,23 @@ shinyServer(function(input, output, session) {
                        labelOptions = labelOptions(noHide = F, direction = 'up'))
   })
   
-  # output$plot1 <- renderPlot({
-  #   ggplot(data = borough_problems, aes(x = Borough, y = input$borough)) +
-  #     geom_bar(stat = "identity") +
-  #     labs(x = "Problem", y = "Count", 
-  #          title = "Tree problems in selected borough")
-  # })
-
-  # observe({
-  #   leafletProxy("map", data = dog_filteredData()) %>%
-  #     clearShapes() %>%
-  #     addCircleMarkers(fillColor = "blue", radius = 3,
-  #                      stroke = FALSE, fillOpacity = 0.5)
-  # })
+  vars <- reactive({ 
+    
+    bors <- borough_problems %>%
+      select(input$problem, Problem)
+    
+    colnames(bors) <- c("Borough", "Problem")
+    
+    as.data.frame(bors)
+    
+  })
   
+  output$plot1 <- renderPlot({
+    
+    ggplot(data = vars(), aes(x = reorder(Problem, -Borough), y = Borough)) +
+      geom_bar(stat = "identity", fill = "#FF6666") + 
+      labs(x = "Problem", y = "Count", title = "Problems in selected borough") 
+    
+  })
   
 })
