@@ -11,6 +11,7 @@ library(shiny)
 library(leaflet)
 
 load('../output/boroughs.RData')
+load('../output/borough_problems.RData')
 
 shinyServer(function(input, output, session) {
   
@@ -51,6 +52,15 @@ shinyServer(function(input, output, session) {
       addCircleMarkers(fillColor = "red", radius = 3,
                        stroke = FALSE, fillOpacity = 0.5,label = ~address) %>%
       addProviderTiles("CartoDB.Positron")
+  })
+  
+    output$plot1 <- renderPlot({
+    
+    ggplot(data = borough_problems, aes(x = Problem, y = Manhattan)) +
+      geom_bar(stat = "identity") +
+      labs(x = "Problem", y = "Count", 
+           title = "Tree problems in selected borough")
+    
   })
   
 })
