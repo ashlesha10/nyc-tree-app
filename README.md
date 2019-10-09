@@ -1,23 +1,8 @@
 # Project 2: Shiny App Development Version 2.0
 
-### [Project Description](doc/project2_desc.md)
+### [Project Description]
 
-![screenshot](doc/screenshot2.png)
-
-In this second project of GR5243 Applied Data Science, we develop a version 2.0 of an *Exploratory Data Analysis and Visualization* shiny app on a topic of your choice using [NYC Open Data](https://opendata.cityofnewyork.us/) or U.S. government open data released on the [data.gov](https://data.gov/) website. See [Project 2 Description](doc/project2_desc.md) for more details.  
-
-The **learning goals** for this project is:
-
-- business intelligence for data science
-- study legacy codes and further development
-- data cleaning
-- data visualization
-- systems development/design life cycle
-- shiny app/shiny server
-
-*The above general statement about project 2 can be removed once you are finished with your project. It is optional.
-
-## Project Title Lorem ipsum dolor sit amet
+## Project Title NYC Street Tree APP
 Term: Fall 2019
 
 + Team # Sec2 Group4
@@ -28,7 +13,9 @@ Term: Fall 2019
 	+ team member 4: Sohn, Jongyoon
 	+ team member 5: Wang, Chen
 
-+ **Project summary**: 
++ **Project summary**: Trees are essential to the well-being of humans living in cities. They help regulate the temperature, they filter the air, and lower the overall noise level. Especially in times of climate change, trees in cities are perceived an essential element to ensure sustainability.
+The NYC Tree App is designed for the ‘NYC Street Tree Caring Program’, which is a volunteer program that intends to help better preserve and protect the street trees of New York City. This App allows more convenient ways to locate trees, identify specific tree problems, and spot additional threats to trees from surrounding environment.
+In recent years, dogs pose an increasing threat to the health of trees (https://www.ltoa.org.uk/resources/dog-damage-to-trees). Our research indicates that dogs can harm trees in certain ways. Due to this fact, the App enables volunteers with insides into how many dogs are registered in a certain Zip code in NYC, helping the volunteers to take protective measures.
 
 + **Contribution statement**: ([default](doc/a_note_on_contributions.md)) All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement. 
 
@@ -36,7 +23,7 @@ Following [suggestions](http://nicercode.github.io/blog/2013-04-05-projects/) by
 
 ```
 proj/
-├── app/
+├── tree_app/
 ├── lib/
 ├── data/
 ├── doc/
