@@ -1,6 +1,6 @@
 # Project 2: Shiny App Development Version 2.0
 
-### [Project Description]
+### [Project Description][NYC Street Tree App.png]
 
 ## Project Title NYC Street Tree APP
 Term: Fall 2019
