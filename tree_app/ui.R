@@ -3,7 +3,7 @@ library(leaflet)
 library(tidyverse)
 library(shinyWidgets)
 
-load('/Users/Chen/Desktop/GR5243/fall2019-proj2--sec2-grp4/output/boroughs.RData')
+load('../output/boroughs.RData')
 # store species in a vector
 species <- trees %>%
   filter(status == "Alive") %>%
