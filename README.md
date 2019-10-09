@@ -6,12 +6,12 @@
 Term: Fall 2019
 
 + Team # Sec2 Group4
-+ **NYC Street Tree App**:
-	+ team member 1: Huang, Yian
-	+ team member 2: Qu, Chang
-	+ team member 3: Schleicher, Tim
-	+ team member 4: Sohn, Jongyoon
-	+ team member 5: Wang, Chen
++ **NYC Street Tree App Team**:
+	+ Huang, Yian
+	+ Qu, Chang
+	+ Schleicher, Tim
+	+ Sohn, Jongyoon
+	+ Wang, Chen
 
 + **Project summary**: Trees are essential to the well-being of humans living in cities. They help regulate the temperature, they filter the air, and lower the overall noise level. Especially in times of climate change, trees in cities are perceived an essential element to ensure sustainability.
 The NYC Tree App is designed for the ‘NYC Street Tree Caring Program’, which is a volunteer program that intends to help better preserve and protect the street trees of New York City. This App allows more convenient ways to locate trees, identify specific tree problems, and spot additional threats to trees from surrounding environment.
