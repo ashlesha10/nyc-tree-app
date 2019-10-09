@@ -6,7 +6,7 @@
 Term: Fall 2019
 
 + Team # Sec2 Group4
-+ **NYC Street Tree App Team**:
++ **NYC Street Tree App** Team:
 	+ Huang, Yian
 	+ Qu, Chang
 	+ Schleicher, Tim
