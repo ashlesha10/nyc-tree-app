@@ -1,11 +1,9 @@
-
-
 library(shiny)
 library(leaflet)
 library(tidyverse)
 library(shinyWidgets)
 
-# load('./output/boroughs.RData')
+load('/Users/Chen/Desktop/GR5243/fall2019-proj2--sec2-grp4/output/boroughs.RData')
 # store species in a vector
 species <- trees %>%
   filter(status == "Alive") %>%
@@ -35,7 +33,7 @@ shinyUI(navbarPage("NYC Tree",id="map",
                             div("This APP is designed for 'NYC Street Tree Caring Program', which is a volunteer program
                                 that intend to help better preserve and protect the street trees of New York City. This APP 
                                 allows more convnient ways to locate trees, identify specific tree problem, and spot additional 
-                                threats to trees from surrounding environment.", style = "color: white; font-size: 18px"),
+                                threats to trees from surrounding environment.", style = "color: white; font-size: 16px"),
                             
                             br(),
                             h2(strong("Features", style = "color:white")),
@@ -44,7 +42,15 @@ shinyUI(navbarPage("NYC Tree",id="map",
                                 they are able to identify tree based on specific requirements. Moreover, we have incorporate the 
                                 NYC dog dataset, in order to identify whether street tree conditions are affected by the the number 
                                 and species of dogs.", 
-                                style = "color: white; font-size: 18px")
+                                style = "color: white; font-size: 16px"),
+                   
+                            br(),
+                            h3(strong("**Dog Damage to Trees", style = "color:white; font-size:16px")),
+                            
+                            splitLayout(cellWidths = c("25%","25%","25%","25%"),
+                              plotOutput("plot2"),plotOutput("plot3"),plotOutput("plot4"),plotOutput("plot5")
+                            )
+                   
                             ),
                    
                    ### FIRST MAP PANEL ###
