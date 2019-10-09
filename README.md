@@ -2,11 +2,11 @@
 
 ### [Project Description] ![](output/NYC.Street.Tree.png)
 
-## Project Title NYC Street Tree APP
+## NYC Street Tree App
 Term: Fall 2019
 
 + Team # Sec2 Group4
-+ **Projec title**: + Team members
++ **NYC Street Tree App**:
 	+ team member 1: Huang, Yian
 	+ team member 2: Qu, Chang
 	+ team member 3: Schleicher, Tim
