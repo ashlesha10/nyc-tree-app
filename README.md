@@ -1,12 +1,12 @@
 # Project 2: Shiny App Development Version 2.0
 
-### [Project Description] ![](output/NYC.Street.Tree.png)
+### ![](output/nyc_street_trees.png)
 
 ## NYC Street Tree App
 Term: Fall 2019
 
 + Team # Sec2 Group4
-+ **NYC Street Tree App** Team:
++ **NYC Street Tree App Team**:
 	+ Huang, Yian
 	+ Qu, Chang
 	+ Schleicher, Tim
