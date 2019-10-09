@@ -1,18 +1,10 @@
-#
-# This is the server logic of a Shiny web application. You can run the
-# application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-
 library(shiny)
 library(leaflet)
 library(htmltools)
 library(ggplot2)
 library(dplyr)
 library(ggpubr)
+library(plotly)
 
 load('../output/boroughs.RData')
 load('../output/borough_problems.RData')
@@ -27,7 +19,6 @@ dogs.count <- dog_count[,2:3]
 names(dogs.count) <- c("ZipCode", "Dogs")
 
 shinyServer(function(input, output, session) {
-  
   output$plot2 <- renderPlot({
     trees.dead <- trees[which(trees$status == "Dead"),]
     trees.dead$postcode <- as.character(trees.dead$postcode)
@@ -38,7 +29,7 @@ shinyServer(function(input, output, session) {
     dogs.trees <- merge(data.frame(dogs.count, row.names=NULL), data.frame(trees.count, row.names=NULL), by = "ZipCode", all = FALSE)
     ggscatter(dogs.trees, x = "Dogs", y = "Dead.Trees", 
               add = "reg.line", conf.int = TRUE, 
-              cor.coef = TRUE, cor.method = "pearson", title = "Dogs vs Trees",
+              cor.coef = TRUE, cor.method = "pearson", title = "Dogs vs Dead Trees",
               xlab = "Number of Dogs", ylab = "Number of Dead Trees")
   })
   output$plot3 <- renderPlot({
@@ -66,7 +57,7 @@ shinyServer(function(input, output, session) {
               add = "reg.line", conf.int = TRUE, 
               cor.coef = TRUE, cor.method = "pearson",
               xlab = "Number of Dogs", ylab = "Number of Trees with other Root Problems") +
-      labs(title = "Dogs vs Trees \nwith Other Root Problems")
+      labs(title = "Dogs vs Trees \nwith other Root Problems")
   })
   output$plot5 <- renderPlot({
     trees.trunk <- trees[which(trees$trnk_other == "Yes"),]
@@ -83,7 +74,6 @@ shinyServer(function(input, output, session) {
       labs(title = "Dogs vs Trees \nwith other Trunk Problems")
   })
   
-  # Reactive expression for the data subsetted to what the user selected
   tree_filteredData <- reactive({
     
     if(input$sidewalk == FALSE){
@@ -93,13 +83,24 @@ shinyServer(function(input, output, session) {
       damage <- "Damage"
     }
     if(input$status == 'Alive'){
-      trees %>%
-        filter(status == input$status) %>%
-        filter(health == input$health) %>%
-        filter(spc_common == input$species) %>%
-        filter(sidewalk == damage) %>%
-        filter(borough == input$borough) %>%
-        filter(tree_dbh >= input$diameter[1] & tree_dbh <= input$diameter[2])
+      if(input$all_species == TRUE){
+        trees %>%
+          filter(status == input$status) %>%
+          filter(health == input$health) %>%
+          filter(sidewalk == damage) %>%
+          filter(borough == input$borough) %>%
+          filter(tree_dbh >= input$diameter[1] & tree_dbh <= input$diameter[2])
+      }
+      else{
+        trees %>%
+          filter(status == input$status) %>%
+          filter(health == input$health) %>%
+          filter(spc_common == input$species) %>%
+          filter(sidewalk == damage) %>%
+          filter(borough == input$borough) %>%
+          filter(tree_dbh >= input$diameter[1] & tree_dbh <= input$diameter[2])
+      }
+      
     }
     else{
       trees %>%
@@ -123,37 +124,35 @@ shinyServer(function(input, output, session) {
     mutate(prop = countbyzip/sum(countbyzip)*10)
   })
   output$map <- renderLeaflet({
-    # Use leaflet() here, and only include aspects of the map that
-    # won't need to change dynamically (at least, not unless the
-    # entire map is being torn down and recreated).
+    pal = colorNumeric("Blues", domain = dtdt()$prop)
     tree_filteredData() %>%
       leaflet() %>%
       addProviderTiles("CartoDB.Positron") %>%
-      addCircleMarkers(fillColor = "red", radius = 3,
+      addCircleMarkers(fillColor = "green", radius = 3,
                        stroke = FALSE, fillOpacity = 0.5) %>%
-      addCircleMarkers(data = dtdt(), radius = ~countbyzip/10, stroke = FALSE,
-                       fillOpacity = ~prop, label = mapply(function(x, y) {
+      addCircleMarkers(data = dtdt(), radius = ~countbyzip/4, stroke = FALSE, fillOpacity = .4,
+                       color = ~pal(prop), label = mapply(function(x, y) {
                          HTML(sprintf("Zip %s:\n %s", htmlEscape(x), htmlEscape(y)))},
                          dtdt()$ZipCode, dtdt()$countbyzip, SIMPLIFY = F),
-                       labelOptions = labelOptions(noHide = F, direction = 'up'))
+                       labelOptions = labelOptions(noHide = F, direction = 'up')) %>%
+      addLegend(pal = pal, values = ~dtdt()$prop, title = "Prop in dog counts",
+                position = "bottomright")
   })
   
   vars <- reactive({ 
-    
     bors <- borough_problems %>%
       select(input$problem, Problem)
-    
     colnames(bors) <- c("Borough", "Problem")
-    
     as.data.frame(bors)
-    
   })
   
   output$plot1 <- renderPlot({
     
+    
     ggplot(data = vars(), aes(x = reorder(Problem, -Borough), y = Borough)) +
       geom_bar(stat = "identity", fill = "#FF6666") + 
-      labs(x = "Problem", y = "Count", title = "Problems in selected borough") 
+      labs(x = "Problem", y = "Count", title = "Problems in selected borough")
+    
     
   })
   
