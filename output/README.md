@@ -4,6 +4,9 @@
 
 The output directory contains analysis output, processed datasets, logs, or other processed things.
 
-"manhattan.RData" includes all trees in Manhattan (65k rows, 24 features) -> WE USE THIS ONE FOR NOW
-
 "boroughs.RData" includes all tres in entire NYC (700k rows, 24 features)
+
+[boroughs_problems.RData](https://github.com/TZstatsADS/fall2019-proj2--sec2-grp4/blob/master/output/borough_problems.RData) includes the different different aggregated problems of trees per borough
+
+"NYC_dogs.RData" includes the amount of licend
+
