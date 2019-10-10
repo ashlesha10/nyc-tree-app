@@ -7,6 +7,7 @@ The data directory contains data used in the analysis. This is treated as read o
 ### Our dataasets are downloaded from NYC open data
 
 [NYC Tree Data](https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh)
+
 [NYC Dog Data](https://data.cityofnewyork.us/Health/NYC-Dog-Licensing-Dataset/nu7n-tubp)
 
 ### Please find the processed datasets in the output folder
