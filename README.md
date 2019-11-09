@@ -5,7 +5,7 @@
 ### ![](output/nyc-street-trees.jpg)
 
 ## NYC Street Tree App
-## [Check out the app](https://changqu.shinyapps.io/fall2019-proj2--sec2-grp4/)
+## [Check out the app!](https://changqu.shinyapps.io/fall2019-proj2--sec2-grp4/)
 
 + Team # Sec2 Group4
 + **NYC Street Tree App** Team:
