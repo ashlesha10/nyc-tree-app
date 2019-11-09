@@ -1,6 +1,6 @@
 # Applied Data Science @ Columbia University
 ## Fall 2019
-## Project 1: Shiny App Development
+## Project 2: Shiny App Development
 
 ### ![](output/nyc-street-trees.jpg)
 
